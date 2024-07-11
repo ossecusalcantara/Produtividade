@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ScrollView, TouchableOpacity, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { CheckBox } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 // Dados mocados com nova categoria
 const initialTasks = [
@@ -130,15 +132,41 @@ function ImportantScreen() {
 }
 
 function  CadastrarScreen() {
+    const navigation = useNavigation();
+
+    return (
+        <View style={styles.buttonContainer}>
+            <Button
+                title="Nova Tarefa"
+                
+            />
+            <Button
+                title="Novo Hábito"
+                
+            />
+        </View>
+    );
+}
+
+// Telas adicionais
+function ScreenA() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Cadastro!!</Text>
+            <Text>Screen A</Text>
         </View>
-      );
+    );
+}
+
+function ScreenB() {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>Screen B</Text>
+        </View>
+    );
 }
     
 
-
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -173,20 +201,20 @@ export default function App() {
                             }}
                         />
                         <Tab.Screen
-                            name="Impotancia"
+                            name="Importância"
                             component={ImportantScreen}
                             options={{
-                                tabBarLabel: 'Impotancia',
+                                tabBarLabel: 'Importância',
                                 tabBarIcon: ({ color, size }) => (
                                     <Ionicons name="ios-star" color={color} size={size} />
                                 ),
                             }}
                         />
                         <Tab.Screen
-                            name="Habitos"
+                            name="Hábitos"
                             component={HabitsScreen}
                             options={{
-                                tabBarLabel: 'Habitos',
+                                tabBarLabel: 'Hábitos',
                                 tabBarIcon: ({ color, size }) => (
                                     <Ionicons name="ios-list" color={color} size={size} />
                                 ),
@@ -212,6 +240,7 @@ export default function App() {
                 <StatusBar style="auto" />
             </View>
         </NavigationContainer>
+        
     );
 }
 
@@ -312,6 +341,14 @@ const styles = StyleSheet.create({
     timesCompletedText: {
         fontSize: 14,
         color: '#666',
+    },
+
+    buttonContainer: {
+        width: '100%',
+        marginBottom: 10,
+    },
+    button: {
+        alignItems: 'flex-start',
     },
 });
 
